@@ -3,6 +3,9 @@ package com.sha.jpapagingsortingfiltering.service;
 import com.sha.jpapagingsortingfiltering.model.Employee;
 import com.sha.jpapagingsortingfiltering.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +36,12 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public List<Employee> findProductsWithSorting(String field){
+    public List<Employee> findEmployeesWithSorting(String field){
         return employeeRepository.findAll(Sort.by(Sort.Direction.ASC, field));
     }
+
+    public Page<Employee> findEmployeesPaginated(Integer offset, Integer pageSize){
+        return employeeRepository.findAll(PageRequest.of(offset, pageSize));
+    }
+
 }
