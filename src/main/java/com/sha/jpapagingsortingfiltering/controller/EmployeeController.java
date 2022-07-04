@@ -4,6 +4,7 @@ import com.sha.jpapagingsortingfiltering.dto.APIResponse;
 import com.sha.jpapagingsortingfiltering.model.Employee;
 import com.sha.jpapagingsortingfiltering.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,12 @@ public class EmployeeController {
     @GetMapping
     public APIResponse<List<Employee>> getEmployees() {
         List<Employee> employeeList = employeeService.findAll();
+        return new APIResponse<>(employeeList.size(), employeeList);
+    }
+
+    @GetMapping("/{field}")
+    public APIResponse<List<Employee>> getEmployeesWithSorting(@PathVariable String field) {
+        List<Employee> employeeList = employeeService.findProductsWithSorting(field );
         return new APIResponse<>(employeeList.size(), employeeList);
     }
 }

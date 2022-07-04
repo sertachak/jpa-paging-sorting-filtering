@@ -3,6 +3,7 @@ package com.sha.jpapagingsortingfiltering.service;
 import com.sha.jpapagingsortingfiltering.model.Employee;
 import com.sha.jpapagingsortingfiltering.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -30,5 +31,9 @@ public class EmployeeService {
 
     public List<Employee> findAll(){
         return employeeRepository.findAll();
+    }
+
+    public List<Employee> findProductsWithSorting(String field){
+        return employeeRepository.findAll(Sort.by(Sort.Direction.ASC, field));
     }
 }
