@@ -41,7 +41,7 @@ public class EmployeeService {
     }
 
     public Page<Employee> findEmployeesPaginated(Integer offset, Integer pageSize){
-        return employeeRepository.findAll(PageRequest.of(offset, pageSize));
+        return employeeRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by( "lastName")));
     }
 
 }
